@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/context
+	   					   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="by.den.beans" />
+
+   <!-- <bean id="msgString" class="java.lang.String">
+        <constructor-arg value="Spring is fun." />
+    </bean>
+
+    <bean id="message" class="by.den.beans.Message">
+        <property name="message" ref="msgString" />
+    </bean>-->
+
+    <bean id="msgConstructor" class="by.den.beans.MsgConstructor">
+        <constructor-arg name="second" value="Constructor Message" />
+        <constructor-arg name="message" value="Second string" />
+    </bean>
+
+    <bean id="msgDefault" class="by.den.beans.MsgDefault" scope="prototype">
+
+    </bean>
+
+    <bean id="msgSetter" class="by.den.beans.MsgSetter">
+        <property name="message" value="Setter Message" />
+        <property name="secondMessage" value="Second Message" />
+    </bean>
+
+</beans>
