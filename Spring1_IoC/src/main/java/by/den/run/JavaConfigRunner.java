@@ -2,10 +2,12 @@ package by.den.run;
 
 import by.den.annotVer.AmExpr;
 import by.den.annotVer.Card;
+import by.den.annotVer.CreditCard;
 import by.den.javaCodeVer.FindAccountService;
 import by.den.javaCodeVer.FinderService;
 import by.den.javaCodeVer.JavaConfig;
 import by.den.javaCodeVer.MyService;
+import fiona.apple.CommandManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -15,11 +17,15 @@ public class JavaConfigRunner {
 //        ApplicationContext ctx = new AnnotationConfigApplicationContext(JavaConfig.class);
 //        ApplicationContext ctx = new AnnotationConfigApplicationContext("by.den.javaCodeVer");
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-        ctx.scan("by.den.annotVer");
-        // и после этого можно не регить конфиг (строка ниже)
+        // add a shutdown hook for the above context...
+        ctx.registerShutdownHook();
+        ctx.register(JavaConfig.class);
+        // после этого можно не регить конфиг (строка ниже)
         // т.к. при scan() конфиг зарегится как аннотированный бин
-//        ctx.register(JavaConfig.class);
+//        ctx.scan("by.den.javaCodeVer");
         ctx.refresh();
+
+        CommandManager mng = (CommandManager) ctx.getBean(CommandManager.class);
 
         MyService findAcc = ctx.getBean(FindAccountService.class);
         MyService my = (MyService) ctx.getBean("myService");
@@ -30,10 +36,11 @@ public class JavaConfigRunner {
 //        my2.doJob();
         finder.doJob();
 
-        Card credit = (Card) ctx.getBean("creditCard");
+//        Card credit = (Card) ctx.getBean("creditCardJava");
+        Card credit = (Card) ctx.getBean(CreditCard.class);
         Card amer = ctx.getBean(AmExpr.class);
         System.out.println(credit);
         System.out.println(amer);
-
+//        ctx.destroy();
     }
 }

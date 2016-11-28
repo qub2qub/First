@@ -72,7 +72,7 @@ public class JDBCTestHabr {
                     "INSERT INTO users(username) values(?)");
             preparedStatement.setString(1, "user_name");
             //метод принимает значение без параметров
-            //темже способом можно сделать и UPDATE
+            //тем же способом можно сделать и UPDATE
             preparedStatement.executeUpdate();
             
             //3.CallableStatement: используется для вызова хранимых функций,

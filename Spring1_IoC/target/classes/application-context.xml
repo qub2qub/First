@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/context
+	   					   http://www.springframework.org/schema/context/spring-context.xsd
+	   					   http://www.springframework.org/schema/lang
+                           http://www.springframework.org/schema/lang/spring-lang.xsd">
+
+    <!--<context:annotation-config />-->
+    <!--Достаточно указать только скан пэкэдж, аннотации подтянутся сами. -->
+    <context:component-scan base-package="by.den.beans" />
+    <context:component-scan base-package="com.example" />
+
+    <!-- <bean id="msgString" class="java.lang.String">
+         <constructor-arg value="Spring is fun." />
+     </bean>
+
+     <bean id="message" class="by.den.beans.Message">
+         <property name="message" ref="msgString" />
+     </bean>-->
+
+    <bean id="msgConstructor" class="by.den.beans.MsgConstructor">
+        <constructor-arg name="second" value="Constructor Message" />
+        <constructor-arg name="message" value="Second string" />
+    </bean>
+
+    <bean id="msgDefault" class="by.den.beans.MsgDefault" scope="prototype">
+
+    </bean>
+
+    <bean id="msgSetter" class="by.den.beans.MsgSetter">
+        <property name="message" value="Setter Message" />
+        <property name="secondMessage" value="Second Message" />
+    </bean>
+
+    <!--
+    when the above bean (messenger) is instantiated, this custom
+    BeanPostProcessor implementation will output the fact to the system console
+    -->
+    <bean class="com.example.InstantiationTracingBeanPostProcessor"/>
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="validation.ExoticType" value="validation.ExoticTypeEditor"/>
+            </map>
+        </property>
+
+    </bean>
+
+        <bean id="dependExoticType" class="validation.DependsOnExoticType">
+            <property name="type" value="aNameForExoticType"/>
+        </bean>
+
+</beans>

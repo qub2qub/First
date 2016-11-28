@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AmExpr implements Card {
     public String getOwner() {
-        return "AmExpr";
+        return "AmExprOwner";
     }
 
     public int getNumber() {
-        return 1;
+        return 2;
     }
 
     @Override

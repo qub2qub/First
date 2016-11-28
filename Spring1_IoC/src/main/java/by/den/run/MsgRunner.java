@@ -4,8 +4,10 @@ import by.den.beans.Message;
 import by.den.beans.MsgConstructor;
 import by.den.beans.MsgDefault;
 import by.den.beans.MsgSetter;
+import com.example.TwoStoresBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import validation.DependsOnExoticType;
 
 public class MsgRunner {
 
@@ -25,5 +27,13 @@ public class MsgRunner {
         System.out.println("msgConstructor = " + msgConstructor.getMessage());
         System.out.println("msgDefault = " + msgDefault.getMessage());
         System.out.println("msgSetter = " + msgSetter.getMessage());
+
+        TwoStoresBean two = (TwoStoresBean) appContext.getBean(TwoStoresBean.class);
+        System.out.println("two = " + two);
+        DependsOnExoticType dependExoticType = (DependsOnExoticType)
+                appContext.getBean(DependsOnExoticType.class);
+        System.out.println("dependExoticType = " + dependExoticType);
+
+
     }
 }

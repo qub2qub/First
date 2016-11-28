@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="fooService" class="x.y.service.DefaultFooService"/>
+
+    <!-- the profiling advice -->
+    <bean id="profiler" class="x.y.aop.SimpleProfiler">
+        <!-- execute before the transactional advice (hence the lower order number) -->
+        <property name="order" value="1"/>
+    </bean>
+
+    <aop:config>
+        <aop:pointcut id="entryPointMethod" expression="execution(* x.y..*Service.*(..))"/>
+        <!-- will execute after the profiling advice (c.f. the order attribute) -->
+
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="entryPointMethod" order="2"/>
+        <!-- order value is higher than the profiling aspect -->
+
+        <aop:aspect id="profilingAspect" ref="profiler">
+            <aop:pointcut id="serviceMethodWithReturnValue"
+                          expression="execution(!void x.y..*Service.*(..))"/>
+            <aop:around method="profile" pointcut-ref="serviceMethodWithReturnValue"/>
+        </aop:aspect>
+
+    </aop:config>
+
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- other <bean/> definitions such as a DataSource and a PlatformTransactionManager here -->
+
+    <bean id="sharedTransactionTemplate"
+          class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="isolationLevelName" value="ISOLATION_READ_UNCOMMITTED"/>
+        <property name="timeout" value="30"/>
+    </bean>
+
+</beans>

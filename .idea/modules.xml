@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CommandLine/CommandLine.iml" filepath="$PROJECT_DIR$/CommandLine/CommandLine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LeanCode/LeanCode.iml" filepath="$PROJECT_DIR$/LeanCode/LeanCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Spring2_MVC/MKYONG EXAMPLE.iml" filepath="$PROJECT_DIR$/Spring2_MVC/MKYONG EXAMPLE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Spring1_IoC/MVC DOC.iml" filepath="$PROJECT_DIR$/Spring1_IoC/MVC DOC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Servlets/Servlets.iml" filepath="$PROJECT_DIR$/Servlets/Servlets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Spring3_MVC/Spring3_MVC.iml" filepath="$PROJECT_DIR$/Spring3_MVC/Spring3_MVC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringBoot/SpringBoot.iml" filepath="$PROJECT_DIR$/SpringBoot/SpringBoot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TUT_JDBC/TUT_JDBC.iml" filepath="$PROJECT_DIR$/TUT_JDBC/TUT_JDBC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TimSpringJdbc/TimSpringJdbc.iml" filepath="$PROJECT_DIR$/TimSpringJdbc/TimSpringJdbc.iml" />
+    </modules>
+  </component>
+</project>

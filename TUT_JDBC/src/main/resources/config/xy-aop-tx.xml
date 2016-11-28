@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="fooService" class="x.y.service.DefaultFooService"/>
+
+    <!-- this is the aspect -->
+    <bean id="profiler" class="x.y.aop.SimpleProfiler">
+        <!-- execute before the transactional advice (hence the lower order number) -->
+        <property name="order" value="1"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager" order="200"/>
+
+    <aop:config>
+        <!-- this advice will execute around the transactional advice -->
+        <aop:aspect id="profilingAspect" ref="profiler">
+            <aop:pointcut id="serviceMethodWithReturnValue"
+                          expression="execution(!void x.y..*Service.*(..))"/>
+            <aop:around method="profile" pointcut-ref="serviceMethodWithReturnValue"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="dataSource" destroy-method="close"
+          class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@rj-t42:1521:elvis"/>
+        <property name="username" value="scott"/>
+        <property name="password" value="tiger"/>
+    </bean>
+
+    <bean id="txManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+</beans>

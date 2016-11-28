@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+    <bean id="aopLogger" class="by.den.aop.AopLogger" />
+    <bean id="aopLocation" class="by.den.model.AopLocation" />
+
+    <aop:config>
+        <!--указываем 1 аспект как главную общую единицу-->
+        <aop:aspect id="logLocation" ref="aopLogger">
+
+            <!-- через PointCut сужаем JoinPoint (к-й определён за ним) -->
+            <aop:pointcut id="findLocPointcut"
+                          expression="execution(* by.den.model.AopLocation.find*(..))" />
+
+            <!--Задаём advice, указывая какой метод вызвать в данном point cut-е-->
+            <aop:before method="initLog" pointcut-ref="findLocPointcut" />
+            <aop:after method="closeLog" pointcut-ref="findLocPointcut" />
+            <aop:after-throwing method="exceptLog" throwing="exc"  pointcut-ref="findLocPointcut" />
+            <aop:after-returning method="objLog" returning="obj" pointcut-ref="findLocPointcut" />
+
+            <!-- point cut для join point-а можно задавть прямо в advice-->
+            <aop:around method="aroundTimeLog"
+                        pointcut="execution(* by.den.model.*.*(..))" />
+
+        </aop:aspect>
+    </aop:config>
+
+</beans>
