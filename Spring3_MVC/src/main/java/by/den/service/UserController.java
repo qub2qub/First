@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class UserController {
 
-    @RequestMapping(value = "/test")
+    //produces() element serves only to restrict the mapping for your request handlers. It does nothing else.
+    @RequestMapping(value = "/test"/*, produces = MediaType.APPLICATION_JSON*/)
     public @ResponseBody User test() {
         return new User("Ivan", "Rybin", 33, "ivan_riba@mail.ru");
     }

@@ -1,6 +1,6 @@
 package ru.mars.Concurrency;
 
-public class DeadLockTest {
+public class DeadLockTest {gitk
 	static class ThreadOne implements Runnable {
 		public void run() {
 			synchronized (Integer.class) {

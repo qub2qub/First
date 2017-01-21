@@ -10,8 +10,8 @@
     <packaging>war</packaging>
 
 <properties>
-    <org.slf4j-version>1.7.21</org.slf4j-version>
-    <fasterxml.jackson-version>2.7.3</fasterxml.jackson-version>
+    <org.slf4j-version>1.7.22</org.slf4j-version>
+    <fasterxml.jackson-version>2.8.5</fasterxml.jackson-version>
 </properties>
 
     <dependencies>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>4.2.5.RELEASE</version>
+            <version>4.3.5.RELEASE</version>
         </dependency>
 
         <dependency>
