@@ -1,8 +1,8 @@
 package old;
 
-import ru.mars.Inheritance.Interface1;
-import ru.mars.Inheritance.Interface2;
-import ru.mars.Inheritance.Interface3;
+import Inheritance.Interface1;
+import Inheritance.Interface2;
+import Inheritance.Interface3;
 
 public interface GroupedInterface extends Interface1, Interface2, Interface3 {
 

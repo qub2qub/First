@@ -11,8 +11,7 @@ public class MyRun {
     public static void main(String[] args) {
     Connection connect = null;
     Connection connect2 = null;
-        JDBUtils myJDBUtils =
-                JDBUtils.getInstance(args[0]);
+        JDBUtils myJDBUtils = JDBUtils.getInstance(args[0]);
         if (myJDBUtils == null) return;
 
     try {

@@ -25,8 +25,7 @@ public class JavaConfigRunner {
 //        ctx.scan("by.den.javaCodeVer");
         ctx.refresh();
 
-        CommandManager mng = (CommandManager) ctx.getBean(CommandManager.class);
-
+        CommandManager mng = ctx.getBean(CommandManager.class);
         MyService findAcc = ctx.getBean(FindAccountService.class);
         MyService my = (MyService) ctx.getBean("myService");
         MyService finder = (FinderService) ctx.getBean("finderService");
@@ -37,10 +36,11 @@ public class JavaConfigRunner {
         finder.doJob();
 
 //        Card credit = (Card) ctx.getBean("creditCardJava");
-        Card credit = (Card) ctx.getBean(CreditCard.class);
+        Card credit = ctx.getBean(CreditCard.class);
         Card amer = ctx.getBean(AmExpr.class);
         System.out.println(credit);
         System.out.println(amer);
 //        ctx.destroy();
+        ctx.close();
     }
 }

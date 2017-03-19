@@ -1,7 +1,7 @@
 public class A258_AddDigits {
 
     /**
-     *  ¿ ¿ﬂ —ÀŒ∆ÕŒ—“‹ ” ›“Œ√Œ ¿À√Œ–»“Ã¿?
+     * –ö–ê–ö–ê–Ø –°–õ–û–ñ–ù–û–°–¢–¨ –£ –≠–¢–û–ì–û –ê–õ–ì–û–†–ò–¢–ú–ê?
      */
     public static int addDigits(int num) {
         String s = "" + num;

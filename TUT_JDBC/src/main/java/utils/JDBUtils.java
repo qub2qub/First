@@ -72,14 +72,10 @@ public class JDBUtils {
     private Properties prop;
 
     public static void initializeTables(Connection con, String dbNameArg, String dbmsArg) throws SQLException {
-        SuppliersTable mySuppliersTable =
-                new SuppliersTable(con, dbNameArg, dbmsArg);
-        CoffeesTable myCoffeeTable =
-                new CoffeesTable(con, dbNameArg, dbmsArg);
-        RSSFeedsTable myRSSFeedsTable =
-                new RSSFeedsTable(con, dbNameArg, dbmsArg);
-        ProductInformationTable myPIT =
-                new ProductInformationTable(con, dbNameArg, dbmsArg);
+        SuppliersTable mySuppliersTable = new SuppliersTable(con, dbNameArg, dbmsArg);
+        CoffeesTable myCoffeeTable = new CoffeesTable(con, dbNameArg, dbmsArg);
+        RSSFeedsTable myRSSFeedsTable = new RSSFeedsTable(con, dbNameArg, dbmsArg);
+        ProductInformationTable myPIT = new ProductInformationTable(con, dbNameArg, dbmsArg);
 
         System.out.println("\nDropping exisiting PRODUCT_INFORMATION, COFFEES and SUPPLIERS tables");
         myPIT.dropTable();

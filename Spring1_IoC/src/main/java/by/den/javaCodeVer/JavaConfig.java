@@ -14,7 +14,6 @@ import org.springframework.context.annotation.*;
 public class JavaConfig {
 
     @Bean()
-
     public MyService myService() {
         return new MyServiceImpl();
     }
